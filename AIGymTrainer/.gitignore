@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Data & Models
+StartSquatAI/data/
+StartSquatAI/models/
+
+# Frontend
+StartSquatAI/StartSquatWeb/node_modules/
+StartSquatAI/StartSquatWeb/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Large binary files
+*.wasm

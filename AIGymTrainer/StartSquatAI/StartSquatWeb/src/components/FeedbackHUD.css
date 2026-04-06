@@ -1,0 +1,330 @@
+/* FeedbackHUD.css — AI Coach HUD Styles */
+
+/* ─── Root layout ─────────────────────────────────────────────────────────── */
+.hud-root {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    z-index: 10;
+}
+
+/* ─── Cards ───────────────────────────────────────────────────────────────── */
+.hud-card {
+    background: rgba(8, 8, 20, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    backdrop-filter: blur(14px);
+    padding: 14px 18px;
+}
+
+/* ─── Top row ─────────────────────────────────────────────────────────────── */
+.hud-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+/* Reps card */
+.reps-card {
+    min-width: 90px;
+}
+.card-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+.card-value {
+    display: block;
+    font-size: 52px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Accuracy card */
+.acc-card {
+    min-width: 116px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.accuracy-ring-wrapper {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.accuracy-svg {
+    position: absolute;
+    inset: 0;
+}
+.accuracy-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+.accuracy-pct {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    transition: color 0.4s ease;
+}
+.accuracy-sub {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+}
+
+/* ─── Status badge ────────────────────────────────────────────────────────── */
+.status-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    align-self: flex-start;
+    margin-top: 4px;
+}
+.status-connected    { background: rgba(0,230,118,0.12); color: #00e676; border-color: #00e67640; }
+.status-connecting   { background: rgba(255,171,0,0.12);  color: #ffab00; border-color: #ffab0040; }
+.status-disconnected { background: rgba(255,61,0,0.12);   color: #ff3d00; border-color: #ff3d0040; }
+.status-no-model     { background: rgba(255,171,0,0.12);  color: #ffab00; border-color: #ffab0040; }
+
+/* ─── Centre feedback banner ──────────────────────────────────────────────── */
+.hud-centre {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-banner {
+    background: rgba(8, 8, 20, 0.78);
+    border: 2px solid;
+    border-radius: 18px;
+    backdrop-filter: blur(16px);
+    padding: 18px 32px;
+    text-align: center;
+    max-width: 480px;
+    animation: banner-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes banner-in {
+    from { opacity: 0; transform: scale(0.88) translateY(8px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+.banner-flash {
+    animation: banner-flash 0.3s ease;
+}
+@keyframes banner-flash {
+    0%   { opacity: 1; }
+    40%  { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.fb-message {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 6px;
+    line-height: 1.2;
+}
+.fb-tip {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ─── Bottom panel ────────────────────────────────────────────────────────── */
+.hud-bottom {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Probability bars */
+.prob-panel {
+    min-width: 210px;
+    flex: 1;
+    max-width: 280px;
+}
+.panel-heading {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+.prob-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 7px;
+    opacity: 0.55;
+    transition: opacity 0.2s;
+}
+.prob-active {
+    opacity: 1;
+}
+.prob-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+}
+.prob-track {
+    flex: 1;
+    height: 7px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.prob-fill {
+    height: 100%;
+    border-radius: 999px;
+}
+.prob-pct {
+    font-size: 10px;
+    font-weight: 700;
+    width: 32px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* Debug panel */
+.debug-panel {
+    min-width: 130px;
+}
+.debug-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 6px;
+}
+.debug-val {
+    font-weight: 700;
+    color: #00e5ff;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Reset button */
+.reset-btn {
+    pointer-events: all;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    align-self: flex-end;
+    margin-bottom: 2px;
+}
+.reset-btn:hover {
+    background: rgba(255,255,255,0.14);
+    color: #fff;
+}
+
+/* ─── Footer ──────────────────────────────────────────────────────────────── */
+.hud-footer {
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.28);
+    margin-top: 4px;
+}
+.hud-footer strong {
+    color: rgba(255,255,255,0.55);
+}
+
+/* ─── Offline / no-AI hint ───────────────────────────────────────────────── */
+.offline-hint {
+    background: rgba(8, 8, 20, 0.70);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    backdrop-filter: blur(12px);
+    padding: 14px 24px;
+    text-align: center;
+    max-width: 420px;
+}
+.offline-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 6px;
+}
+.offline-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ─── Exercise switcher pill ─────────────────────────────────────────────── */
+.exercise-pill {
+    display: flex;
+    gap: 6px;
+    pointer-events: all;
+    margin-bottom: 2px;
+    align-self: flex-end;
+}
+.exercise-pill button {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.10);
+    border-radius: 999px;
+    color: rgba(255,255,255,0.5);
+    font-size: 18px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.exercise-pill button:hover {
+    background: rgba(255,255,255,0.14);
+    transform: translateY(-2px);
+}
+.exercise-pill button.active {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.50);
+    color: #fff;
+}
+
+/* ─── Plank hold timer ───────────────────────────────────────────────────── */
+.plank-timer {
+    font-size: 72px;
+    font-weight: 900;
+    color: #00e676;
+    text-shadow: 0 0 40px #00e67666;
+    font-variant-numeric: tabular-nums;
+    animation: banner-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    line-height: 1;
+}
